@@ -1,0 +1,69 @@
+﻿<Page
+    x:Class="HeterogeneousListView.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HeterogeneousListView"
+    xmlns:data="using:HeterogeneousListView.Data"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="MilkTemplate"                       >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Milk" />
+                <TextBlock Grid.Column="1" Text="{Binding Liters}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OrangeTemplate"                         >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Orange" />
+                <TextBlock Grid.Column="1" Text="{Binding Weight}"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CookieTemplate"                         >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="Cookie" />
+                <TextBlock Grid.Column="1" Text="{Binding Pieces}"/>
+            </Grid>
+        </DataTemplate>
+        
+
+        <local:ProductTemplateSelector x:Key="ProductTemplateSelector"
+                                       MilkTemplate="{StaticResource MilkTemplate}"
+                                       OrangeTemplate="{StaticResource OrangeTemplate}"
+                                       CookieTemplate="{StaticResource CookieTemplate}"/>
+
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListView x:ConnectionId='1' 
+            Grid.Column="0"
+            Header="ListView with data template selector"
+            x:Name="ProductsListWithSelector"
+            ItemTemplateSelector="{StaticResource ProductTemplateSelector}"/>
+        <ListView x:ConnectionId='2'
+            Grid.Column="1"
+            x:Name="ProductList"
+            Header="ListView with choosing item manually"
+                                                                    />
+    </Grid>
+</Page>
+

@@ -1,0 +1,1 @@
+D:\Projects\Win10\HeterogeneousListView\heterogeneous-listView\HeterogeneousListView\HeterogeneousListView.csproj;x86
