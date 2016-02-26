@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using HeterogeneousListView.Data;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -8,14 +9,23 @@ namespace HeterogeneousListView
 {
     public sealed partial class MainPage : Page
     {
+        private IDictionary<Type, string> _templatesMapping = new Dictionary<Type, string>()
+        {
+            {typeof(Milk), "MilkTemplate"},
+            {typeof(Orange), "OrangeTemplate"},
+            {typeof(Cookie), "CookieTemplate"}
+        };
+
+
         public MainPage()
         {
             InitializeComponent();
+
             List<object> dataSource = CreateRandomDataSource();
             ProductsListWithSelector.ItemsSource = dataSource;
             ProductList.ItemsSource = dataSource;
         }
-
+        
         private List<object> CreateRandomDataSource()
         {
             var random = new Random();
@@ -34,13 +44,6 @@ namespace HeterogeneousListView
 
             return dataSource;
         }
-
-        private IDictionary<Type, string> _templatesMapping = new Dictionary<Type, string>()
-        {
-            {typeof(Milk), "MilkTemplate"},
-            {typeof(Orange), "OrangeTemplate"},
-            {typeof(Cookie), "CookieTemplate"}
-        };
         
 
         private void ProductListChoosingItemContainer(ListViewBase sender, ChoosingItemContainerEventArgs args)
